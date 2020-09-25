@@ -15,10 +15,10 @@ General usage: turing options inputFile
 
 Option descriptions:
 
-  -v VERBOSITY  --verbosity=VERBOSITY  Set initial verbosity of debug messages. Possible values: 0 - no debug messages 1 - only machine state and tape contents the machine is currently looking at 2 - machine state as well as whole tape contents. Default: 0
-  -s STEP       --step=STEP            Only print debug messages every 2^STEP machine steps. Default: 0
-  -d DELAY      --delay=DELAY          Pause execution for 2^DELAY microseconds every machine step. -1 disables pausing and disables interactivity. Maximum: 20. Default: -1
-  -h            --help                 Display this message and exit.
+*  -v VERBOSITY  --verbosity=VERBOSITY  Set initial verbosity of debug messages. Possible values: 0 - no debug messages 1 - only machine state and tape contents the machine is currently looking at 2 - machine state as well as whole tape contents. Default: 0
+*  -s STEP       --step=STEP            Only print debug messages every 2^STEP machine steps. Default: 0
+*  -d DELAY      --delay=DELAY          Pause execution for 2^DELAY microseconds every machine step. -1 disables pausing and disables interactivity. Maximum: 20. Default: -1
+*  -h            --help                 Display this message and exit.
 
 Turing machine source code file format: 
   * The first line contains the input to the Turing machine, that is, the initial contents of the first tape. Letters are separated by whitespace.
@@ -26,15 +26,20 @@ Turing machine source code file format:
   * All subsequent lines denote the transition table of the machine. Each line contains, in that order:
     - Letters seen by the head of the machine on each tape
     - A transition for each state except the accepting state. The transition contains:
-      \# The new state of the machine;
-      \# For each tape: the letter to be written to the tape on the current position and either of <, > or ^, which is the direction the tape should move to (^ means the tape does not move)
+      - The new state of the machine;
+      - For each tape: the letter to be written to the tape on the current position and either of <, > or ^, which is the direction the tape should move to (^ means the tape does not move)
+      
  The transition table must be exhaustive: a transition should be specified for every possible state x letter^n combination, where n is the number of tapes.
  The first letter of the first line of the transition table specifies the blank character. The tapes are infinite from both sides and, unless overwritten, will be populated by copies of the blank character.
+ 
  Both letters and state symbols may consist of multiple non-whitespace characters ('letter' here is used in the sense of the element of the machine's alphabet).
+ 
  Empty lines are NOT allowed, except for the first line, which (if empty) means that the Turing machine receives no input.
+ 
  After the execution has completed, the contents of the last tape, from position 0 to the right, are interpreted as the output.
 
 Unless interactivity is disabled, during interpretation you can enter commands.
+
 Debugger commands:
  * b - pause/unpause debugging.
  * p VERBOSITY - print machine state. Verbosity of 0 is not allowed. Default: 1
